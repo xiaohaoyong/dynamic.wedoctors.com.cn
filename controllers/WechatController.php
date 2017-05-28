@@ -23,7 +23,7 @@ class WechatController extends Controller
     {
 
         $wechat=new Wechat(WECHAT_TOKEN);
-       // return $wechat->checkSignature();
+        return $wechat->checkSignature();
 
         return $wechat->run();
     }
