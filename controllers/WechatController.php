@@ -30,6 +30,8 @@ class WechatController extends Controller
 
     public function actionSetmenu()
     {
+
+
         $contentUrl = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' . WECHAT_APPID . '&redirect_uri=' . $contentViews . '&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect';
 
         $menuList = array(
