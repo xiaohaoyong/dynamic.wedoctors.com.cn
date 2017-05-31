@@ -49,7 +49,7 @@ class UserLogin extends \yii\db\ActiveRecord
     {
         return [
             'userid' => 'Userid',
-            'password' => 'Password',
+            'password' => '密码',
         ];
     }
     /**

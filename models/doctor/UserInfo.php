@@ -52,7 +52,10 @@ class UserInfo extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['userid', 'idnum'], 'required'],
+            [['userid', 'idnum','phone'], 'required'],
+            [['phone'], 'unique','targetClass' => 'app\models\doctor\UserInfo','message'=>'{attribute}已经被占用了'],
+            ['phone','match','pattern'=>'/^1[3|4|5|6|7|8|][0-9]{9,9}$/','message'=>'请输入正确{attribute}'],
+
             [['userid', 'sex', 'age', 'birthday', 'phone', 'hospitalid', 'subject_b', 'subject_s', 'title', 'province', 'county', 'city', 'atitle', 'otype'], 'integer'],
             [['name'], 'string', 'max' => 15],
             [['intro', 'avatar', 'skilful'], 'string', 'max' => 150],
@@ -67,26 +70,26 @@ class UserInfo extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'userid' => 'Userid',
-            'name' => 'Name',
-            'sex' => 'Sex',
-            'age' => 'Age',
-            'birthday' => 'Birthday',
-            'phone' => 'Phone',
-            'hospitalid' => 'Hospitalid',
-            'subject_b' => 'Subject B',
-            'subject_s' => 'Subject S',
-            'title' => 'Title',
-            'intro' => 'Intro',
-            'avatar' => 'Avatar',
-            'skilful' => 'Skilful',
-            'idnum' => 'Idnum',
-            'province' => 'Province',
-            'county' => 'County',
-            'city' => 'City',
-            'atitle' => 'Atitle',
-            'otype' => 'Otype',
-            'authimg' => 'Authimg',
+            'userid' => '用户ID',
+            'name' => '姓名',
+            'sex' => '性别',
+            'age' => '年龄',
+            'birthday' => '十个八个如',
+            'phone' => '手机号码',
+            'hospitalid' => '所以在医院',
+            'subject_b' => '一级科室',
+            'subject_s' => '二级科室',
+            'title' => '职称',
+            'intro' => '简介',
+            'avatar' => '头像',
+            'skilful' => '擅长',
+            'idnum' => '身份证号码',
+            'province' => '省',
+            'county' => '县',
+            'city' => '市',
+            'atitle' => '行政职称',
+            'otype' => '职业类型',
+            'authimg' => '证件照',
         ];
     }
 }

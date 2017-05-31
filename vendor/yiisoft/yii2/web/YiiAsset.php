@@ -20,6 +20,6 @@ class YiiAsset extends AssetBundle
         'yii.js',
     ];
     public $depends = [
-        'app\assets\JqueryAsset',
+        'yii\web\JqueryAsset',
     ];
 }

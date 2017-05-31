@@ -60,6 +60,6 @@ class User extends \yii\db\ActiveRecord
     }
     public function getLogin()
     {
-        return $this->hasOne(Userinfo::className(),['id'=>'userid']);
+        return $this->hasOne(Userinfo::className(),['userid'=>'id']);
     }
 }

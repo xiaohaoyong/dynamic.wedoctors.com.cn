@@ -11,9 +11,7 @@ namespace app\models\wechat;
  */
 
 class WechatRequest{
-    const  DEFAULT_RESPONSE="约车流程 \n
-http://mp.weixin.qq.com/s/R8IPpy5-9sdsz-sG3IXSgw\n
-客服电话:4007070517";
+    const  DEFAULT_RESPONSE="感谢关注拉手健康！您会收到学院课程和医学头条通知";
     /**
      * @descrpition 分发请求
      * @param $request

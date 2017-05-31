@@ -17,7 +17,7 @@ $config = [
             'dateFormat' => 'php:Y-m-d',
         ],
         'user' => [
-            'identityClass' => 'app\models\User',
+            'identityClass' => 'app\models\doctor\User',
             'enableAutoLogin' => true,
         ],
         'errorHandler' => [
@@ -37,14 +37,6 @@ $config = [
                 [
                     'class' => 'yii\log\FileTarget',
                     'levels' => ['error', 'warning'],
-                ],
-            ],
-        ],
-        'assetManager' => [
-            'bundles' => [
-                'yii\web\JqueryAsset' => [
-                    'sourcePath' => null,
-                    'js' => []
                 ],
             ],
         ],

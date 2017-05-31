@@ -18,10 +18,13 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/site.css?t=123',
+        'http://static.c.wedoctors.com.cn/login.css',
+    ];
+    public $js =[
+        'http://static.j.wedoctors.com.cn/js/flexible.js',
+        'http://static.j.wedoctors.com.cn/js/login_reg.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
     ];
 }
