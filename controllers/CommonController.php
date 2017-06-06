@@ -9,6 +9,7 @@
 namespace app\controllers;
 
 
+use app\components\helper\WeUrl;
 use app\models\doctor\UserLogin;
 use app\models\LoginWechat;
 use app\models\wechat\WeChatOAuth;
@@ -46,7 +47,7 @@ class CommonController extends Controller
        if (($model->load(['openid'=>OPENID],'UserLogin') && $model->login()) || \Yii::$app->controller->action->id=='register') {
             return $beforeAction;
         }else{
-            return \YII::$app->getResponse()->redirect(\WeUrl::to(['/user/register']));
+            return \YII::$app->getResponse()->redirect(WeUrl::to(['/user/register']));
         }
     }
 }

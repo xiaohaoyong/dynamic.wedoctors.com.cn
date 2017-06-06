@@ -1,5 +1,5 @@
 <?php
-
+namespace app\components\helper;
 /**
  * Created by PhpStorm.
  * User: wangzhen
