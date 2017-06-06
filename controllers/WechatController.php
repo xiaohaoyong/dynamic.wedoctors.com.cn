@@ -1,5 +1,6 @@
 <?php
 namespace app\controllers;
+use app\components\helper\WeUrl;
 use app\models\Order;
 use app\models\PayNotifyCallBack;
 use app\models\wechat\Menu;
@@ -30,16 +31,12 @@ class WechatController extends Controller
 
     public function actionSetmenu()
     {
-
-        $user_index = urlencode(Url::to('user/index',["t"=>time()]));
-        $url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' . WECHAT_APPID . '&redirect_uri=' . $user_index . '&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect';
-
         $menuList = array(
             array('id' => '1', 'pid' => '0', 'name' => '拉手学院', 'type' => 'view', 'code' => 'http://www.wedoctors.com.cn/down/app.html'),
             array('id' => '2', 'pid' => '0', 'name' => '全科学院', 'type' => 'view', 'code' => 'http://www.wedoctors.com.cn/down/app.html'),
             array('id' => '3', 'pid' => '0', 'name' => '我的', 'type' => 'view', 'code' =>''),
             array('id' => '4', 'pid' => '3', 'name' => '下载APP', 'type' => 'view', 'code' =>'http://www.wedoctors.com.cn/down/app.html'),
-            array('id' => '5', 'pid' => '3', 'name' => '个人中心', 'type' => 'view', 'code' =>$url),
+            array('id' => '5', 'pid' => '3', 'name' => '个人中心', 'type' => 'view', 'code' =>WeUrl::to(['user/index',["t"=>time()]])),
         );
         print_r($menuList);
         $result = Menu::setMenu($menuList);

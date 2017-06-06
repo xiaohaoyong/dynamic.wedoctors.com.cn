@@ -15,7 +15,9 @@ $this->title="注册"
     ]); ?>
         <div class="clearfix RegForm f16">
             <?=$form->field($info,'phone',['enableAjaxValidation' => true])->textInput(['placeholder' => '请输入手机号码','class'=>'f16 userName'])?>
-            <?=$form->field($login,'password',['template' => "<p>{label}</p>\n<div class=\"box - flex\"> \n{input} \n<span class=\"login_passIcon js-pass-display\"></span>\n</div>\""])->passwordInput(['placeholder' => '请输入登录密码','class'=>'f16 userPass'])?>
+            <?=$form->field($login,'password',[
+                    'template' =>
+                        "<p>{label}</p>\n<div class=\"box - flex\"> \n{input} \n<span class=\"login_passIcon js-pass-display\"></span>\n</div>"])->passwordInput(['placeholder' => '请输入登录密码','class'=>'f16 userPass'])?>
             <div class="login_line box">
                 <p>验证码</p>
                 <div class="box-flex">
