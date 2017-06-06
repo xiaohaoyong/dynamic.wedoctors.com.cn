@@ -46,8 +46,7 @@ class CommonController extends Controller
        if (($model->load(['openid'=>OPENID],'UserLogin') && $model->login()) || \Yii::$app->controller->action->id=='register') {
             return $beforeAction;
         }else{
-           echo 1111111111;exit;
-            return \YII::$app->getResponse()->redirect(['/user/view','openid' =>OPENID]);
+            return \YII::$app->getResponse()->redirect(\WeUrl::to(['/user/register']));
         }
     }
 }
