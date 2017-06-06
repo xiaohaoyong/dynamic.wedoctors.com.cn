@@ -52,7 +52,7 @@ class UserInfo extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['userid', 'idnum','phone'], 'required'],
+            [['phone'], 'required'],
             [['phone'], 'unique','targetClass' => 'app\models\doctor\UserInfo','message'=>'{attribute}已经被占用了'],
             ['phone','match','pattern'=>'/^1[3|4|5|6|7|8|][0-9]{9,9}$/','message'=>'请输入正确{attribute}'],
 

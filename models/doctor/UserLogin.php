@@ -9,6 +9,7 @@ use Yii;
  *
  * @property integer $userid
  * @property string $password
+ * @property string $openid
  */
 class UserLogin extends \yii\db\ActiveRecord
 {
@@ -38,6 +39,7 @@ class UserLogin extends \yii\db\ActiveRecord
         return [
             [['userid', 'password'], 'required'],
             [['userid'], 'integer'],
+            [['openid'],'string'],
             [['password'], 'string', 'max' => 32],
         ];
     }
@@ -58,7 +60,7 @@ class UserLogin extends \yii\db\ActiveRecord
      */
     public function login()
     {
-        if ($this->validate() && $this->get_User()) {
+        if ($this->get_User()) {
             return Yii::$app->user->login($this->get_User(),3600*24*30);
         }
         return false;
@@ -66,7 +68,11 @@ class UserLogin extends \yii\db\ActiveRecord
 
     public static function findByOpenid($openid)
     {
-        return self::findOne(['openid'=>$openid]);
+        $userLogin=self::findOne(['openid'=>$openid]);
+        if($userLogin)
+        {
+            return User::findOne($userLogin->userid);
+        }
     }
 
     public function getInfo()
@@ -86,8 +92,8 @@ class UserLogin extends \yii\db\ActiveRecord
     public function get_User()
     {
         if ($this->_user === false) {
-            $Login=self::findByOpenid($this->openid);
-            $this->_user=$Login->user;
+            $user=self::findByOpenid($this->openid);
+            $this->_user=$user;
         }
         return $this->_user;
     }

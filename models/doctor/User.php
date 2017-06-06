@@ -12,8 +12,9 @@ use Yii;
  * @property integer $type
  * @property integer $createtime
  * @property integer $state
+ * @property integer $source
  */
-class User extends \yii\db\ActiveRecord
+class User extends \yii\db\ActiveRecord  implements \yii\web\IdentityInterface
 {
     /**
      * @inheritdoc
@@ -60,6 +61,54 @@ class User extends \yii\db\ActiveRecord
     }
     public function getLogin()
     {
-        return $this->hasOne(Userinfo::className(),['userid'=>'id']);
+        return $this->hasOne(UserLogin::className(),['userid'=>'id']);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public static function findIdentity($id)
+    {
+        return static::findOne($id);
+        //return isset(self::$users[$id]) ? new static(self::$users[$id]) : null;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public static function findIdentityByAccessToken($token, $type = null)
+    {
+        return static::findOne(['access_token' => $token]);
+        /*foreach (self::$users as $user) {
+            if ($user['accessToken'] === $token) {
+                return new static($user);
+            }
+        }
+
+        return null;*/
+    }
+
+    /**
+     * Returns an ID that can uniquely identify a user identity.
+     * @return string|integer an ID that uniquely identifies a user identity.
+     */
+    public function getId(){
+        return $this->id;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getAuthKey()
+    {
+        return $this->authKey;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function validateAuthKey($authKey)
+    {
+        return $this->authKey === $authKey;
     }
 }

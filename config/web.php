@@ -53,6 +53,9 @@ $config = [
 ];
 $db= require(__DIR__ . '/db.php');
 $config['components']=$config['components']+$db;
+
+$redis= require(__DIR__ . '/redis.php');
+$config['components']=$config['components']+$redis;
 if (YII_ENV_DEV)
 {
     // configuration adjustments for 'dev' environment
