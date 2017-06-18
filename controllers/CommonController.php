@@ -53,6 +53,7 @@ class CommonController extends Controller
         $model = new UserLogin();
 
         $jump=[
+            'login',
             'validate-form',
             'validate-phone',
             'send-code',
@@ -61,7 +62,7 @@ class CommonController extends Controller
         if (($model->load(['UserLogin'=>['openid'=>OPENID]]) && $model->login()) || in_array(\Yii::$app->controller->action->id,$jump)) {
             return $beforeAction;
         }else{
-            return \YII::$app->getResponse()->redirect(['/user/register']);
+            return \YII::$app->getResponse()->redirect(['/user/login']);
         }
     }
 }

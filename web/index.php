@@ -7,7 +7,7 @@ $WEDOCTORCONFIG = parse_ini_file(__DIR__.'/../system/WEDOCTOR_CONFIG');
 // comment out the following two lines when deployed to production
 defined('YII_DEBUG') or define('YII_DEBUG', true);
 defined('YII_ENV') or define('YII_ENV', 'dev');
-
+defined('__ROOT__') or define('__ROOT__', dirname(dirname(__FILE__)));
 define("WECHAT_URL", BASE_URL.'/wechat.php');
 define('WECHAT_TOKEN', '6d8fd128e41186469f2f98e0f3e523eb');
 define('ENCODING_AES_KEY', "jH0eyd8HjsnmEw6OfwDBXwvzrbjYa4Mdw0nbrvk4Mwy");

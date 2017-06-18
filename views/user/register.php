@@ -1,7 +1,26 @@
 <?php
 use yii\helpers\Html;
-$this->title="注册"
+use yii\bootstrap\Nav;
+use yii\bootstrap\NavBar;
+use yii\widgets\Breadcrumbs;
+use app\assets\LoginAsset;
+
+LoginAsset::register($this);
 ?>
+<?php $this->beginPage() ?>
+    <!DOCTYPE html>
+<html lang="<?= Yii::$app->language ?>">
+    <head>
+        <meta charset="<?= Yii::$app->charset ?>">
+        <meta content="yes" name="apple-mobile-web-app-capable" />
+        <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+        <meta content="telephone=no" name="format-detection" />
+        <?= Html::csrfMetaTags() ?>
+        <title><?= Html::encode($this->title) ?></title>
+        <?php $this->head() ?>
+    </head>
+<body>
+<?php $this->beginBody(); $this->title="注册"?>
 <div class="clearfix RegBox">
     <?php $form = \yii\bootstrap\ActiveForm::begin([
         'id' => 'js-reg-form',
@@ -24,8 +43,8 @@ $this->title="注册"
                 'template' =>
                     "<p>{label}</p>\n<div class=\"box-flex\"> \n{input} \n</div><div><p class=\"reg_code f14 js-reg-send\">获取验证码</p></div>"])->textInput(['placeholder' => '请输入登录密码','class'=>'f16 userCode'])?>
             </div>
-        </div>
     <?= \yii\helpers\Html::submitButton('注册', ['class'=>'Login_sub clearfix f16']) ?>
+        </div>
     <p class="Reg_agree f13 tc"><span>我已阅读并同意<a href="" target="_blank">《拉手医生用户协议》</a></span></p>
     <?php \yii\bootstrap\ActiveForm::end(); ?>
 </div>
@@ -50,3 +69,7 @@ EOD;
 $js[]=$jsform;
 $this->registerJs(implode("\n",$js));
 ?>
+<?php $this->endBody() ?>
+</body>
+</html>
+<?php $this->endPage() ?>

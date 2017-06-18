@@ -30,6 +30,15 @@ use Yii;
  */
 class UserInfo extends \yii\db\ActiveRecord
 {
+    public static $atitleText=[0=>'未设置',1=>'院长',2=>'副院长',3=>'科主任',4=>'科副主任',5=>'其他'];
+    public static $otypeText=[0=>'未设置',1=>'医生',2=>'护士',3=>'药师',4=>'其他',5=>'检验师'];
+    public static $titleText=[
+        0=>'未设置',1=>'主任医师',2=>'副主任医师',3=>'主治医师',4=>'住院医师',
+        16=>'助理医师',5=>'护士',6=>'护师',7=>'主管护师',8=>'副主任护师',9=>'主任护师',
+        10=>'药士',11=>'药师',12=>'主管药师',13=>'副主任药师',14=>'主任药师',15=>'其他',
+        17=>'检验士',18=>'主管检验师',19=>'副主任检验师',20=>'主任检验师'];
+    public static $sexText=[1=>'男',2=>'女'];
+
     /**
      * @inheritdoc
      */
@@ -91,5 +100,17 @@ class UserInfo extends \yii\db\ActiveRecord
             'otype' => '职业类型',
             'authimg' => '证件照',
         ];
+    }
+
+    /**
+     * @return \app\models\doctor\User
+     */
+    public function getUser()
+    {
+        return  $this->hasOne(User::className(),['id'=>'userid']);
+    }
+    public function getHospital()
+    {
+        return $this->hasOne(Hospital::className(),['id'=>'hospitalid']);
     }
 }

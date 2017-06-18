@@ -57,13 +57,32 @@ class User extends \yii\db\ActiveRecord  implements \yii\web\IdentityInterface
     }
     public function getInfo()
     {
-        return $this->hasOne(UserInfo::className(),['id' => 'userid']);
+        return $this->hasOne(UserInfo::className(),['userid' => 'id']);
     }
+
+    /**
+     * @return \app\models\doctor\UserLogin
+     */
     public function getLogin()
     {
         return $this->hasOne(UserLogin::className(),['userid'=>'id']);
     }
 
+    /**ß
+     * 根据手机号查询用户
+     * @param $phone
+     * @return null|\app\models\doctor\User
+     */
+    public static function findPhoneRow($phone)
+    {
+        $userInfo=UserInfo::findOne(['phone'=>$phone]);
+        if($userInfo)
+        {
+            return $userInfo->user;
+        }
+        return null;
+
+    }
     /**
      * @inheritdoc
      */

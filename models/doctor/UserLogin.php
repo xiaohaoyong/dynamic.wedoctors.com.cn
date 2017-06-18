@@ -97,4 +97,9 @@ class UserLogin extends \yii\db\ActiveRecord
         }
         return $this->_user;
     }
+
+    public function validatePassword($password)
+    {
+        return $this->password==md5($password.'KzhRb99Tn37dPP4u');
+    }
 }

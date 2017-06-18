@@ -1,15 +1,17 @@
 <?php
+/* @var $user app\models\doctor\User */
 use yii\helpers\Html;
-$this->title="我的"
+$this->title="我的";
+$user=Yii::$app->user->identity;
 ?>
 <div class="mine_Infor clearfix mt20 bgfff">
-    <a class="box db" href="">
+    <a class="box db" >
         <div class="mine_docPic">
-            <img src="http://static.i2.xywy.com/zhuanjia/20141219/20074f05716655d118b9b67fb1d96ec319148_d.jpg" alt="">
+            <img src="<?=$user->info->avatar?>" alt="">
         </div>
         <div class="box-flex">
-            <p class="mt5 clearfix"><span class="f18 fl">张仲景</span><span class="mine_Title mt03 f12 fl">主治医生</span></p>
-            <p class="f15 c9 mt5 clearfix">北京协和医院<span class="ml25">神经内科</span></p>
+            <p class="mt5 clearfix"><span class="f18 fl"><?=$user->info->name?></span><span class="mine_Title mt03 f12 fl"><?=\app\models\doctor\UserInfo::$titleText[$user->info->title]?></span></p>
+            <p class="f15 c9 mt5 clearfix"><?=$user->info->hospital->name?><span class="ml25"><?=\app\models\doctor\Subject::$subject[$user->info->subject_b]?></span></p>
         </div>
     </a>
 </div>

@@ -12,14 +12,37 @@ namespace app\controllers;
 use app\components\helper\WeUrl;
 use app\components\send\Sms;
 use app\models\Code;
+use app\models\doctor\PhoneLoginFrom;
 use app\models\doctor\User;
 use app\models\doctor\UserInfo;
 use app\models\doctor\UserLogin;
+use app\models\wechat\UserManage;
 
 class UserController extends CommonController
 {
     public function actionIndex()
     {
+        if(!\Yii::$app->user->identity->info->avatar)
+        {
+            $userJson=UserManage::getUserInfo(OPENID);
+            $user=json_decode($userJson,true);
+            if($user['headimgurl']) {
+                $baseName = substr(md5($user['headimgurl']), 8, 16);
+                $img = $baseName . '.jpg';
+
+                $ch = curl_init($user['headimgurl']);
+                $fp = fopen(__ROOT__."/../".\Yii::$app->params['imageDir']."/upload/" . $img, 'wb');
+                curl_setopt($ch, CURLOPT_FILE, $fp);
+                curl_setopt($ch, CURLOPT_HEADER, 0);
+                curl_exec($ch);
+                curl_close($ch);
+                fclose($fp);
+                $info=\Yii::$app->user->identity->info;
+                $info->avatar=\Yii::$app->params['imageUrl'].$img;
+                $info->save();
+
+            }
+        }
         return $this->render('index', [
         ]);
     }
@@ -56,11 +79,49 @@ class UserController extends CommonController
 
             }
         }
-        return $this->render('register', [
+        return $this->renderPartial('register', [
             'login' =>$login,
             'info' => $info,
             'code' => $code,
         ]);
+    }
+
+    public function actionLogin()
+    {
+
+        if (!\Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
+        $model = new PhoneLoginFrom();
+        if(\Yii::$app->request->isPost) {
+            if ($model->load(\Yii::$app->request->post()) && $model->login()) {
+                $user=\Yii::$app->user->identity;
+                $login=$user->login;
+                $login->openid=OPENID;
+                $login->save();
+
+                return $this->goBack();
+            } else {
+                $model->firstErrors;
+                \Yii::$app->getSession()->setFlash('error', '用户名或密码错误！');
+            }
+        }
+        return $this->renderPartial('login',[
+            'model'=>$model,
+        ]);
+    }
+    public function actionValidateLogin()
+    {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $model=new PhoneLoginFrom();
+        $model->load(\Yii::$app->request->post());
+        $phonevalidate = \yii\widgets\ActiveForm::validate($model);
+        if($phonevalidate) {
+            return $phonevalidate;
+        }
+
+        return $phonevalidate;
     }
     public function actionValidateForm()
     {
