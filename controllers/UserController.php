@@ -24,8 +24,7 @@ class UserController extends CommonController
     {
         if(!\Yii::$app->user->identity->info->avatar)
         {
-            $userJson=UserManage::getUserInfo(OPENID);
-            $user=json_decode($userJson,true);
+            $user=UserManage::getUserInfo(OPENID);
             if($user['headimgurl']) {
                 $baseName = substr(md5($user['headimgurl']), 8, 16);
                 $img = $baseName . '.jpg';
