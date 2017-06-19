@@ -25,6 +25,7 @@ class CommonController extends Controller
     {
         $beforeAction = parent::beforeAction($action);
         if (!\Yii::$app->user->isGuest) {
+
             $openid = \Yii::$app->user->identity->login->openid;
             define('OPENID', $openid);
         }else {

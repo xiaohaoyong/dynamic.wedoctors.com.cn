@@ -87,7 +87,6 @@ class UserController extends CommonController
 
     public function actionLogin()
     {
-
         if (!\Yii::$app->user->isGuest) {
             return $this->goHome();
         }
