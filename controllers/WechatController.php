@@ -1,9 +1,11 @@
 <?php
 namespace app\controllers;
 use app\components\helper\WeUrl;
+use app\models\doctor\UserLogin;
 use app\models\Order;
 use app\models\PayNotifyCallBack;
 use app\models\wechat\Menu;
+use app\models\wechat\TemplateMessage;
 use app\models\wechat\Wechat;
 use app\models\WxOrder;
 use app\models\WxPayApi;
@@ -47,5 +49,27 @@ class WechatController extends Controller
     {
         $notify = new PayNotifyCallBack();
         $notify->Handle(false);
+    }
+    public function actionTempMsg()
+    {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $date=\Yii::$app->request->post('data');
+        $tempid=\Yii::$app->request->post('tempid');
+        $touseropenid=\Yii::$app->request->post('touseropenid');
+        $url=\Yii::$app->request->post('url');
+
+        if($touseropenid) {
+
+            $return=TemplateMessage::sendTemplateMessage($date, $touseropenid, $tempid,$url);
+            if($return['errcode']===0)
+            {
+                return ['code'=>10000,'msg'=>'成功'];
+            }else{
+                $code=20000+$return['errcode'];
+                return ['code'=>$code,'msg'=>$return['errmsg']];
+            }
+        }else{
+            return ['code'=>20000,'msg'=>'用户不存在或没有绑定微信。'];
+        }
     }
 }
