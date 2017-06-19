@@ -1,6 +1,6 @@
 <?php
 ini_set('display_errors', 'on');
-error_reporting(E_ALL ^ E_NOTICE);
+error_reporting(0);
 define('ACRDIR',__DIR__.'/../');
 $WEDOCTORCONFIG = parse_ini_file(__DIR__.'/../system/WEDOCTOR_CONFIG');
 
