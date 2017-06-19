@@ -29,11 +29,10 @@ class PhoneLoginFrom extends Model
     {
         if(!$this->hasErrors()){
             $user=$this->getUser();
-            if(!$user || $user->login->validatePassword($this->password)){
+            if(!$user || !$user->login->validatePassword($this->password)){
                 $this->addError($attribute,'用户名或密码错误！');
             }
         }
-
     }
 
     public function login()

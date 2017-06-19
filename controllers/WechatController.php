@@ -36,7 +36,7 @@ class WechatController extends Controller
             array('id' => '2', 'pid' => '0', 'name' => '全科学院', 'type' => 'view', 'code' => 'http://www.wedoctors.com.cn/down/app.html'),
             array('id' => '3', 'pid' => '0', 'name' => '我的', 'type' => 'view', 'code' =>''),
             array('id' => '4', 'pid' => '3', 'name' => '下载APP', 'type' => 'view', 'code' =>'http://www.wedoctors.com.cn/down/app.html'),
-            array('id' => '5', 'pid' => '3', 'name' => '个人中心', 'type' => 'view', 'code' =>WeUrl::to(['user/login',["t"=>time()]])),
+            array('id' => '5', 'pid' => '3', 'name' => '个人中心', 'type' => 'view', 'code' =>WeUrl::to(['user/index',["t"=>time()]])),
         );
         print_r($menuList);
         $result = Menu::setMenu($menuList);

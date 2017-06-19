@@ -98,7 +98,6 @@ class UserController extends CommonController
                 $login=$user->login;
                 $login->openid=OPENID;
                 $login->save();
-
                 return $this->goBack();
             } else {
                 $model->firstErrors;

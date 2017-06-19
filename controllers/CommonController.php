@@ -15,6 +15,7 @@ use app\models\LoginWechat;
 use app\models\wechat\WeChatOAuth;
 use yii\base\InvalidRouteException;
 use yii\helpers\Url;
+use yii\helpers\VarDumper;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\web\HttpException;
@@ -23,13 +24,14 @@ class CommonController extends Controller
 {
     public function beforeAction($action)
     {
+
+        $cookies = \Yii::$app->request->cookies;//注意此处是request
         $beforeAction = parent::beforeAction($action);
         if (!\Yii::$app->user->isGuest) {
-
             $openid = \Yii::$app->user->identity->login->openid;
             define('OPENID', $openid);
+            return $beforeAction;
         }else {
-            $cookies = \Yii::$app->request->cookies;//注意此处是request
             if (isset($_GET['state']) && isset($_GET['code'])) {
                 $info = WeChatOAuth::getAccessTokenAndOpenId($_GET['code']);
                 if ($info['openid']) {
@@ -40,17 +42,17 @@ class CommonController extends Controller
                         'name' => 'openid',
                         'value' => $openid,
                         'expire'=>time()+3600*24,
+                        //'domain'=>'.wedoctors.com.cn',
+                        //'path'=>'/',
                     ]));
                 }
             }elseif($cookies->has('openid')){
-                $openid=$cookies->get('openid');
+                $openid=$cookies->getValue('openid');
                 define('OPENID', $openid);
             }else{
                 throw new HttpException('101','非法访问');
             }
         }
-
-
         $model = new UserLogin();
 
         $jump=[
@@ -63,7 +65,8 @@ class CommonController extends Controller
         if (($model->load(['UserLogin'=>['openid'=>OPENID]]) && $model->login()) || in_array(\Yii::$app->controller->action->id,$jump)) {
             return $beforeAction;
         }else{
-            return \YII::$app->getResponse()->redirect(['/user/login']);
+            \YII::$app->getResponse()->redirect(['/user/login']);
+            return false;
         }
     }
 }
