@@ -21,6 +21,7 @@ class AppAsset extends AssetBundle
         'http://static.c.wedoctors.com.cn/css.css',
     ];
     public $js =[
+        'http://static.j.wedoctors.com.cn/js/zepto.min.js',
         'http://static.j.wedoctors.com.cn/js/flexible.js',
         'http://static.j.wedoctors.com.cn/js/login_reg.js?t=2',
     ];
