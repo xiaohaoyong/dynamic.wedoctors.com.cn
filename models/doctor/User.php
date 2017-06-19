@@ -16,6 +16,7 @@ use Yii;
  */
 class User extends \yii\db\ActiveRecord  implements \yii\web\IdentityInterface
 {
+    public static $levelText=[2=>'已审核',1=>'审核中',0=>'未审核',-1=>'审核未通过'];
     /**
      * @inheritdoc
      */

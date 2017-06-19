@@ -18,9 +18,9 @@ $user=Yii::$app->user->identity;
 
 <div class="bgfff mt25 clearfix mine_Box">
     <ul>
-        <li class="new"><a href=""><span class="f16">钱包</span></a></li>
-        <li class="mine_icon1"><a href=""><span class="f16">积分</span></a></li>
-        <li class="mine_icon2"><a href=""><span class="f16">认证</span><b class="fr f14 c9 fn mr20">未认证</b></a></li>
+        <li class="new"><a href="<?=\yii\helpers\Url::to(['account/list'])?>"><span class="f16">钱包</span></a></li>
+        <li class="mine_icon1"><a href="<?=\yii\helpers\Url::to(['point/list'])?>"><span class="f16">积分</span></a></li>
+        <li class="mine_icon2"><a ><span class="f16">认证</span><b class="fr f14 c9 fn mr20"><?=\app\models\doctor\User::$levelText[$user->level]?></b></a></li>
     </ul>
 </div>
 <div class="bgfff mt25 clearfix mine_Box">
