@@ -69,7 +69,7 @@ class WechatController extends Controller
                 return ['code'=>$code,'msg'=>$return['errmsg']];
             }
         }else{
-            return ['code'=>20000,'msg'=>'用户不存在或没有绑定微信。'];
+            return ['code'=>20000,'msg'=>'用户不存在或没有绑定微信。','data'=>\Yii::$app->request->post()];
         }
     }
 }
