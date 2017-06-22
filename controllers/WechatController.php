@@ -53,14 +53,14 @@ class WechatController extends Controller
     public function actionTempMsg()
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-        $date=\Yii::$app->request->post('data');
+        $data=\Yii::$app->request->post('data');
         $tempid=\Yii::$app->request->post('tempid');
         $touseropenid=\Yii::$app->request->post('touseropenid');
         $url=\Yii::$app->request->post('url');
 
         if($touseropenid) {
 
-            $return=TemplateMessage::sendTemplateMessage($date, $touseropenid, $tempid,$url);
+            $return=TemplateMessage::sendTemplateMessage(json_decode($data,true), $touseropenid, $tempid,$url);
             if($return['errcode']===0)
             {
                 return ['code'=>10000,'msg'=>'成功','data'=>\Yii::$app->request->post()];
