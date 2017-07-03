@@ -27,7 +27,7 @@ if($dynamic)
 ?>
 <div class="Article_list clearfix tc">
     <span class="Article_time f12"><?=date('Y-m-d H:i',$dyv->createtime)?></span>
-    <a href="<?=$dyv->id?>" class="db Article_box clearfix">
+    <a href="http://dynamic.wedoctors.com.cn/show/<?=$dyv->id?>" class="db Article_box clearfix">
         <h3 class="fn f18"><?=$row->title?></h3>
         <p class="f16 tl"><?=$doctor->info->hospital->name?><?=\app\models\doctor\UserInfo::$titleText[$doctor->info->title]?> <?=$doctor->info->name?></p>
         <div class="Article_Img pr">
