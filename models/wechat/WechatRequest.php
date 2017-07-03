@@ -135,15 +135,7 @@ class WechatRequest{
      * @return array
      */
     public static function text(&$request){
-        $content ="约车流程 ".chr(240).chr(159).chr(145).chr(135)." \n
-http://mp.weixin.qq.com/s/R8IPpy5-9sdsz-sG3IXSgw\n
-客服电话:4007070517";
-//        $a="";
-//        for($i=0;$i<strlen($request['content']);$i++)
-//        {
-//            $a.=ord($request['content'][$i]);
-//        }
-//        file_put_contents(ACRDIR.'uploads/text.txt',$a."|".ord($request['content'])."\n",FILE_APPEND );
+        $content="";
         return ResponsePassive::text($request['fromusername'], $request['tousername'], $content);
     }
 
