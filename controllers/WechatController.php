@@ -57,6 +57,7 @@ class WechatController extends Controller
         $tempid=\Yii::$app->request->post('tempid');
         $touseropenid=\Yii::$app->request->post('touseropenid');
         $url=\Yii::$app->request->post('url');
+        var_dump($data);exit;
 
         if($touseropenid) {
 
