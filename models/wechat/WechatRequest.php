@@ -135,7 +135,7 @@ class WechatRequest{
      * @return array
      */
     public static function text(&$request){
-        $content="";
+        $content="感谢关注拉手健康！提高基层医生业务能力，从拉手开始。如果您想了解更多或建议，请给我们留言。";
         return ResponsePassive::text($request['fromusername'], $request['tousername'], $content);
     }
 
